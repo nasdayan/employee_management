@@ -11,8 +11,7 @@ import java.util.List;
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
 
-    @Autowired
-    private EmployeeDao employeeDao;
+    private final EmployeeDao employeeDao;
 
     @Override
     @Transactional
@@ -24,5 +23,21 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Transactional
     public void saveEmployee(Employee employee) {
         employeeDao.saveEmployee(employee);
+    }
+
+    @Override
+    @Transactional
+    public Employee getEmployee(int id) {
+        return employeeDao.getEmployee(id);
+    }
+
+    @Override
+    @Transactional
+    public void deleteEmployee(int id) {
+        employeeDao.deleteEmployee(id);
+    }
+
+    public EmployeeServiceImpl(@Autowired EmployeeDao employeeDao) {
+        this.employeeDao = employeeDao;
     }
 }
